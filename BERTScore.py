@@ -1,4 +1,4 @@
-from bert_score.bert_score import score
+from bert_score import score
 import numpy as np
 
 class BERTScore:
@@ -13,7 +13,8 @@ class BERTScore:
                 gts (dict)  : dictionary with key <image id> and value <tokenized reference sentence>
         :return: cider (float) : computed CIDEr score for the corpus
         """
-
+        print("======== generated sentences ========\n", generated_sents)
+        print("======== reference sentences ========\n", reference_sents)
         output = score(generated_sents, reference_sents, lang=self.lang, verbose=True,
                        rescale_with_baseline=True, idf=True)
         precision, recall, f1_scores = output
