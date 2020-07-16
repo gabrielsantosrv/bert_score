@@ -6,16 +6,17 @@ class BERTScore:
         self.lang = lang
         self.metric = metric
 
-    def compute_score(self, reference_sents, generated_sents):
+    def compute_score(self, reference_sents, generated_sents, verbose=False):
         """
         Main function to compute CIDEr score
         :param  res (list) : list of dictionaries with image ic and tokenized hypothesis / candidate sentence
                 gts (dict)  : dictionary with key <image id> and value <tokenized reference sentence>
         :return: cider (float) : computed CIDEr score for the corpus
         """
-        print("======== generated sentences ========\n", generated_sents)
-        print("======== reference sentences ========\n", reference_sents)
-        output = score(generated_sents, reference_sents, lang=self.lang, verbose=True,
+        if verbose:
+            print("======== generated sentences ========\n", generated_sents)
+            print("======== reference sentences ========\n", reference_sents)
+        output = score(generated_sents, reference_sents, lang=self.lang, verbose=verbose,
                        rescale_with_baseline=True, idf=True)
         precision, recall, f1_scores = output
 
